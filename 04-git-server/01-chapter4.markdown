@@ -1,4 +1,4 @@
-# Git on the Server #
+# Git บนเซิร์ฟเวอร์ #
 
 At this point, you should be able to do most of the day-to-day tasks for which you’ll be using Git. However, in order to do any collaboration in Git, you’ll need to have a remote Git repository. Although you can technically push changes to and pull changes from individuals’ repositories, doing so is discouraged because you can fairly easily confuse what they’re working on if you’re not careful. Furthermore, you want your collaborators to be able to access the repository even if your computer is offline — having a more reliable common repository is often useful. Therefore, the preferred method for collaborating with someone is to set up an intermediate repository that you both have access to, and push to and pull from that. We’ll refer to this repository as a "Git server"; but you’ll notice that it generally takes a tiny amount of resources to host a Git repository, so you’ll rarely need to use an entire server for it.
 
@@ -55,7 +55,7 @@ To clone a Git repository over SSH, you can specify ssh:// URL like this:
 	$ git clone ssh://user@server:project.git
 
 Or you can not specify a protocol — Git assumes SSH if you aren’t explicit:
-	
+
 	$ git clone user@server:project.git
 
 You can also not specify a user, and Git assumes the user you’re currently logged in as.
@@ -177,11 +177,11 @@ First, you should check to make sure you don’t already have a key. By default,
 
 You’re looking for a pair of files named something and something.pub, where the something is usually `id_dsa` or `id_rsa`. The `.pub` file is your public key, and the other file is your private key. If you don’t have these files (or you don’t even have a `.ssh` directory), you can create them by running a program called `ssh-keygen`, which is provided with the SSH package on Linux/Mac systems and comes with the MSysGit package on Windows:
 
-	$ ssh-keygen 
+	$ ssh-keygen
 	Generating public/private rsa key pair.
-	Enter file in which to save the key (/Users/schacon/.ssh/id_rsa): 
-	Enter passphrase (empty for no passphrase): 
-	Enter same passphrase again: 
+	Enter file in which to save the key (/Users/schacon/.ssh/id_rsa):
+	Enter passphrase (empty for no passphrase):
+	Enter same passphrase again:
 	Your identification has been saved in /Users/schacon/.ssh/id_rsa.
 	Your public key has been saved in /Users/schacon/.ssh/id_rsa.pub.
 	The key fingerprint is:
@@ -191,7 +191,7 @@ First it confirms where you want to save the key (`.ssh/id_rsa`), and then it as
 
 Now, each user that does this has to send their public key to you or whoever is administrating the Git server (assuming you’re using an SSH server setup that requires public keys). All they have to do is copy the contents of the `.pub` file and e-mail it. The public keys look something like this:
 
-	$ cat ~/.ssh/id_rsa.pub 
+	$ cat ~/.ssh/id_rsa.pub
 	ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU
 	GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3
 	Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA
@@ -282,11 +282,11 @@ First you need to enable the hook:
 	$ mv hooks/post-update.sample hooks/post-update
 	$ chmod a+x hooks/post-update
 
-If you’re using a version of Git earlier than 1.6, the `mv` command isn’t necessary — Git started naming the hooks examples with the .sample postfix only recently. 
+If you’re using a version of Git earlier than 1.6, the `mv` command isn’t necessary — Git started naming the hooks examples with the .sample postfix only recently.
 
 What does this `post-update` hook do? It looks basically like this:
 
-	$ cat .git/hooks/post-update 
+	$ cat .git/hooks/post-update
 	#!/bin/sh
 	exec git-update-server-info
 
@@ -317,7 +317,7 @@ This way, you can set up HTTP-based read access to any of your projects for a fa
 
 Now that you have basic read/write and read-only access to your project, you may want to set up a simple web-based visualizer. Git comes with a CGI script called GitWeb that is commonly used for this. You can see GitWeb in use at sites like `http://git.kernel.org` (see Figure 4-1).
 
-Insert 18333fig0401.png 
+Insert 18333fig0401.png
 Figure 4-1. The GitWeb web-based user interface.
 
 If you want to check out what GitWeb would look like for your project, Git comes with a command to fire up a temporary instance if you have a lightweight server on your system like `lighttpd` or `webrick`. On Linux machines, `lighttpd` is often installed, so you may be able to get it to run by typing `git instaweb` in your project directory. If you’re running a Mac, Leopard comes preinstalled with Ruby, so `webrick` may be your best bet. To start `instaweb` with a non-lighttpd handler, you can run it with the `--httpd` option.
@@ -423,7 +423,7 @@ The `gitosis.conf` file is the control file you use to specify users, repositori
 
 If you look at the `gitosis.conf` file, it should only specify information about the `gitosis-admin` project that you just cloned:
 
-	$ cat gitosis.conf 
+	$ cat gitosis.conf
 	[gitosis]
 
 	[group gitosis-admin]
@@ -548,7 +548,7 @@ Repos named `gitolite-admin` and `testing` are created on the server by default.
 
 	$ git clone gitolite:gitolite-admin
 	$ git clone gitolite:testing
-	
+
 To clone these same repos from any other account:
 
 	$ git clone gitolite@servername:gitolite-admin
@@ -755,7 +755,7 @@ These days, you have a huge number of hosting options to choose from, each with 
 
 	http://git.or.cz/gitwiki/GitHosting
 
-Because we can’t cover all of them, and because I happen to work at one of them, we’ll use this section to walk through setting up an account and creating a new project at GitHub. This will give you an idea of what is involved. 
+Because we can’t cover all of them, and because I happen to work at one of them, we’ll use this section to walk through setting up an account and creating a new project at GitHub. This will give you an idea of what is involved.
 
 GitHub is by far the largest open source Git hosting site and it’s also one of the very few that offers both public and private hosting options so you can keep your open source and private commercial code in the same place. In fact, we used GitHub to privately collaborate on this book.
 
@@ -774,32 +774,32 @@ Figure 4-2. The GitHub plan page.
 
 Here you must choose a username that isn’t yet taken in the system and enter an e-mail address that will be associated with the account and a password (see Figure 4-3).
 
-Insert 18333fig0403.png 
+Insert 18333fig0403.png
 Figure 4-3. The GitHub user signup form.
 
 If you have it available, this is a good time to add your public SSH key as well. We covered how to generate a new key earlier, in the "Simple Setups" section. Take the contents of the public key of that pair, and paste it into the SSH Public Key text box. Clicking the "explain ssh keys" link takes you to detailed instructions on how to do so on all major operating systems.
 Clicking the "I agree, sign me up" button takes you to your new user dashboard (see Figure 4-4).
 
-Insert 18333fig0404.png 
+Insert 18333fig0404.png
 Figure 4-4. The GitHub user dashboard.
 
-Next you can create a new repository. 
+Next you can create a new repository.
 
 ### Creating a New Repository ###
 
 Start by clicking the "create a new one" link next to Your Repositories on the user dashboard. You’re taken to the Create a New Repository form (see Figure 4-5).
 
-Insert 18333fig0405.png 
+Insert 18333fig0405.png
 Figure 4-5. Creating a new repository on GitHub.
 
 All you really have to do is provide a project name, but you can also add a description. When that is done, click the "Create Repository" button. Now you have a new repository on GitHub (see Figure 4-6).
 
-Insert 18333fig0406.png 
+Insert 18333fig0406.png
 Figure 4-6. GitHub project header information.
 
 Since you have no code there yet, GitHub will show you instructions for how create a brand-new project, push an existing Git project up, or import a project from a public Subversion repository (see Figure 4-7).
 
-Insert 18333fig0407.png 
+Insert 18333fig0407.png
 Figure 4-7. Instructions for a new repository.
 
 These instructions are similar to what we’ve already gone over. To initialize a project if it isn’t already a Git project, you use
@@ -815,7 +815,7 @@ When you have a Git repository locally, add GitHub as a remote and push up your 
 
 Now your project is hosted on GitHub, and you can give the URL to anyone you want to share your project with. In this case, it’s `http://github.com/testinguser/iphone_project`. You can also see from the header on each of your project’s pages that you have two Git URLs (see Figure 4-8).
 
-Insert 18333fig0408.png 
+Insert 18333fig0408.png
 Figure 4-8. Project header with a public URL and a private URL.
 
 The Public Clone URL is a public, read-only Git URL over which anyone can clone the project. Feel free to give out that URL and post it on your web site or what have you.
@@ -826,7 +826,7 @@ The Your Clone URL is a read/write SSH-based URL that you can read or write over
 
 If you have an existing public Subversion project that you want to import into Git, GitHub can often do that for you. At the bottom of the instructions page is a link to a Subversion import. If you click it, you see a form with information about the import process and a text box where you can paste in the URL of your public Subversion project (see Figure 4-9).
 
-Insert 18333fig0409.png 
+Insert 18333fig0409.png
 Figure 4-9. Subversion importing interface.
 
 If your project is very large, nonstandard, or private, this process probably won’t work for you. In Chapter 7, you’ll learn how to do more complicated manual project imports.
@@ -837,17 +837,17 @@ Let’s add the rest of the team. If John, Josie, and Jessica all sign up for ac
 
 Click the "edit" button in the project header or the Admin tab at the top of the project to reach the Admin page of your GitHub project (see Figure 4-10).
 
-Insert 18333fig0410.png 
+Insert 18333fig0410.png
 Figure 4-10. GitHub administration page.
 
 To give another user write access to your project, click the “Add another collaborator” link. A new text box appears, into which you can type a username. As you type, a helper pops up, showing you possible username matches. When you find the correct user, click the Add button to add that user as a collaborator on your project (see Figure 4-11).
 
-Insert 18333fig0411.png 
+Insert 18333fig0411.png
 Figure 4-11. Adding a collaborator to your project.
 
 When you’re finished adding collaborators, you should see a list of them in the Repository Collaborators box (see Figure 4-12).
 
-Insert 18333fig0412.png 
+Insert 18333fig0412.png
 Figure 4-12. A list of collaborators on your project.
 
 If you need to revoke access to individuals, you can click the "revoke" link, and their push access will be removed. For future projects, you can also copy collaborator groups by copying the permissions of an existing project.
@@ -856,7 +856,7 @@ If you need to revoke access to individuals, you can click the "revoke" link, an
 
 After you push your project up or have it imported from Subversion, you have a main project page that looks something like Figure 4-13.
 
-Insert 18333fig0413.png 
+Insert 18333fig0413.png
 Figure 4-13. A GitHub main project page.
 
 When people visit your project, they see this page. It contains tabs to different aspects of your projects. The Commits tab shows a list of commits in reverse chronological order, similar to the output of the `git log` command. The Network tab shows all the people who have forked your project and contributed back. The Downloads tab allows you to upload project binaries and link to tarballs and zipped versions of any tagged points in your project. The Wiki tab provides a wiki where you can write documentation or other information about your project. The Graphs tab has some contribution visualizations and statistics about your project. The main Source tab that you land on shows your project’s main directory listing and automatically renders the README file below it if you have one. This tab also shows a box with the latest commit information.
@@ -869,12 +869,12 @@ This way, projects don’t have to worry about adding users as collaborators to 
 
 To fork a project, visit the project page (in this case, mojombo/chronic) and click the "fork" button in the header (see Figure 4-14).
 
-Insert 18333fig0414.png 
+Insert 18333fig0414.png
 Figure 4-14. Get a writable copy of any repository by clicking the "fork" button.
 
 After a few seconds, you’re taken to your new project page, which indicates that this project is a fork of another one (see Figure 4-15).
 
-Insert 18333fig0415.png 
+Insert 18333fig0415.png
 Figure 4-15. Your fork of a project.
 
 ### GitHub Summary ###
